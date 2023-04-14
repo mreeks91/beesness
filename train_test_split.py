@@ -2,9 +2,9 @@ import os
 import shutil
 import random
 
-PATH = 'E:/Bees/Images'
-TRAIN_PATH = 'E:/Bees/train'
-TEST_PATH = 'E:/Bees/test'
+PATH = 'E:/Bees/compressed_images'
+TRAIN_PATH = 'E:/Bees/compressed_images'
+TEST_PATH = 'E:/Bees/train'
 TEST_RATIO = 0.2 
 
 for path in [TRAIN_PATH,TEST_PATH]:

@@ -1,6 +1,6 @@
 import urllib.request
 from PIL import Image
-from settings import TSV_DIRECTORY, IMAGE_DIRECTORY
+from settings import TSV_DIRECTORY, IMAGE_DIRECTORY, CLASSES
 import os
 import pandas as pd
 
@@ -31,8 +31,26 @@ def download_images(url_df,class_name,image_size=(400,400)):
         except (AttributeError,FileNotFoundError):
             pass
 
+def compress_images(class_name,compressRatio = 10):
+    source_path = IMAGE_DIRECTORY + '/' + class_name
+    save_path = source_path + '_compressed'
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    for filename in os.listdir(source_path):
+        im = Image.open(source_path+'/'+filename)
+        try:
+            im.save(save_path+'/'+filename,
+                    'JPEG',
+                    optimize = True,
+                    quality = 10)
+        except OSError:
+            pass
+
+
 if __name__ == "__main__":
-    classes = ['vespa']
+    classes = ['sphecidae','vespa','vespula','xylocopa']
     for cls in classes:
-        sample = image_urls_from_file(cls)
-        download_images(sample,cls)
+        #sample = image_urls_from_file(cls)
+        #download_images(sample,cls)
+        print(f"Compressing {cls} images...")
+        compress_images(cls)
