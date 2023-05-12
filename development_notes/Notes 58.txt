@@ -1,0 +1,9 @@
+Notes 5/8
+
+- The xresnet34 architecture from fastai seems to have better training and CV performance with this amount of data. Switching back to the smaller architecture, which should also help for deployment.
+- However, there is some evidence of learning rate problems when training bee34largebs; decreasing training performance after a few epochs. This suggests I might want to be making use of a learning rate scheduler. I will finish training this model (15 epochs, 3 frozen epochs) and then try using the one-cycle policy with manual freezing/unfreezing.
+
+Deployment notes:
+- Going to create a walled-garden subreddit for bot testing. Otherwise bot registration and configuration seems straightforward.
+- Current bot schema: search for posts that mention bees/wasps, feed to fine-grain classification model, feed-forward to three class model (which doesn't do any deep learning; it will just consolidate predictions from ecologically similar species into three megaclasses), post if confidence is high enough.;
+- Need to get in touch with /r/whatisthisbug mods for permission, probably. 
